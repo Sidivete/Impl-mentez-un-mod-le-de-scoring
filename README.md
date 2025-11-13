@@ -1,4 +1,4 @@
-# OC Data Scientist - Projet 7 : Implémentez un modèle de scoring
+# Implémentez un modèle de scoring
 
 ## Contexte
 Prêt à dépenser est une société financière qui propose des crédits à la consommation à des personnes ayant peu ou pas d'historique 
