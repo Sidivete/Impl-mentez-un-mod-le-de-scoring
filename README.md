@@ -1,36 +1,94 @@
-# Implémentez un modèle de scoring
+# Modèle de Scoring Crédit — Pipeline ML complet + Dashboard explicable
 
-## Contexte
-Prêt à dépenser est une société financière qui propose des crédits à la consommation à des personnes ayant peu ou pas d'historique 
-de prêt.L'entreprise souhaite mettre en œuvre un outil de scoring crédit pour calculer la probabilité qu'un client rembourse son prêt, 
-classer la demande en crédit accordé ou refusé, et expliquer de manière transparente au client les décisions d'octroi de crédit.
+Pipeline Machine Learning de bout en bout pour la prédiction du risque de défaut de remboursement, avec dashboard interactif, interprétabilité SHAP et détection de data drift.
 
-Le modèle de scoring crédit sera utilisé par les professionnels de la banque pour évaluer les demandes de prêt. 
-Il sera important que le modèle soit capable d'expliquer les décisions d'octroi de crédit de manière claire et transparente,
-afin que les clients puissent comprendre pourquoi leur demande a été acceptée ou refusée.
+---
 
-Voici quelques avantages supplémentaires de l'utilisation d'un tableau de bord interactif :
+## Projet
 
-- Il permet de suivre les performances du modèle de scoring crédit et d'identifier les domaines d'amélioration.
-- Il permet de communiquer les résultats des calculs aux clients de manière claire et concise.
-- Il permet de générer des rapports sur les décisions d'octroi de crédit, qui peuvent être utilisés pour améliorer les processus internes.
-- Il permet de se conformer aux exigences réglementaires en matière de prêt.
+Prêt à Dépenser est une société financière proposant des crédits à la consommation à des personnes ayant peu ou pas d'historique de prêt. L'objectif est de calculer automatiquement la probabilité qu'un client rembourse son crédit, de classifier la demande en accordé ou refusé, et d'expliquer les décisions de manière transparente aux gestionnaires et aux clients.
 
-## DATA
+---
+
+## Ce que j'ai construit
+
+- Pipeline EDA complet sur 300 000+ lignes : nettoyage, gestion des valeurs manquantes, détection d'anomalies, feature engineering, visualisations
+- Modélisation avec plusieurs algorithmes (LightGBM retenu) optimisé sur le score métier business plutôt que sur l'accuracy classique
+- Interprétabilité globale et locale via SHAP : explication de chaque décision d'octroi ou de refus
+- API Flask de scoring : endpoint de prédiction consommé par le dashboard
+- Dashboard interactif Streamlit pour les gestionnaires : visualisation des profils clients, probabilité de défaut, comparaison aux clients similaires
+- Détection de data drift avec Evidently : surveillance de la stabilité du modèle sur de nouvelles données
+- Rapport HTML de drift exporté automatiquement
+
+---
+
+## Stack
+
+- Machine Learning : LightGBM, Scikit-learn
+- Interprétabilité : SHAP
+- API : Flask, Python
+- Dashboard : Streamlit
+- Data Drift : Evidently
+- EDA & Visualisation : Pandas, NumPy, Matplotlib, Seaborn
+- Données : Kaggle Home Credit Default Risk (300 000+ lignes)
+
+---
+
+## Structure du projet
+
+```
+EDA.ipynb                               Analyse exploratoire et feature engineering
+MOdelisation.ipynb                      Modélisation, optimisation et interprétation SHAP
+DATADRIFT.ipynb                         Calcul du drift entre données train et nouvelles données
+app.py                                  API Flask — endpoint de prédiction
+dab.py                                  Dashboard Streamlit interactif
+report.html                             Rapport HTML de data drift (Evidently)
+BEDDY_SIDI_3_note_méthodologique.pdf    Note méthodologique complète
+presentation.pdf                        Support de présentation
+```
+
+---
+
+## Pipeline ML
+
+Étape 1 — EDA et préparation des données sur le dataset Kaggle Home Credit (300 000+ lignes, 120+ features), nettoyage et feature engineering.
+
+Étape 2 — Modélisation et sélection du modèle final LightGBM, optimisé sur un score métier personnalisé pénalisant davantage les faux négatifs (prêts accordés à tort).
+
+Étape 3 — Interprétabilité SHAP globale (importance des features) et locale (explication de chaque décision individuelle).
+
+Étape 4 — Déploiement via API Flask consommée par le dashboard Streamlit.
+
+Étape 5 — Monitoring : détection du data drift entre les données d'entraînement et les nouvelles données via Evidently.
+
+---
+
+## Lancement
+
+**API Flask**
+
+```bash
+pip install -r package.txt
+python app.py
+```
+
+**Dashboard Streamlit**
+
+```bash
+streamlit run dab.py
+```
+
+---
+
+## Données
+
+Dataset public Kaggle — Home Credit Default Risk :
 https://www.kaggle.com/c/home-credit-default-risk/data
 
-## MISSION 
-- Construire un modèle de scoring qui produit une prédiction de probabilité de défaut pour une demande client de façon automatique.
-- Construire un dashboard interactif à destination des gestionnaires de relation client,qui interprète les prédictions faites par le modèle,
-visualise les informations des clients, et permette d’expliquer aux clients les décisions d’octroi de crédit.
+---
 
-## LIVRABLE 
-- EDA.ipynb : Notebook de prétraitement et d'analyse exploratoire des données, avec essai de plusieurs modèles de modélisation.
-- Modelisation.ipynb : Notebook de préparation de l'interprétation et de la visualisation des résultats du modèle.
-- DATADRIFT.ipynb : Notebook contenant le calcul du drift entre les nouvelles données et les données d'entraînement.
-- report.html : Fichier HTML contenant un tableau présentant les résultats du calcul du drift.
-- app.py : Code source de l'API Flask de mise à disposition des routes.
-- dab.py : Code du dashboard avec Streamlit.
-- Rapport.pdf : Rapport décrivant la méthodologie du modèle de scoring, son interprétation, son déploiement, et les limites et améliorations identifiées.
-- Présentation.pdf : Support de présentation.
+## Auteur
 
+Sidi Teyib BEDDY — Data Scientist | ML Engineer
+
+[LinkedIn](https://linkedin.com/in/sidi-teyib) · [GitHub](https://github.com/Sidivete)
