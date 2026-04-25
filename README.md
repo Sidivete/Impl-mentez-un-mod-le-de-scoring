@@ -20,6 +20,17 @@ Prêt à Dépenser est une société financière proposant des crédits à la co
 - Détection de data drift avec Evidently : surveillance de la stabilité du modèle sur de nouvelles données
 - Rapport HTML de drift exporté automatiquement
 
+  
+## Visualisations
+
+Interprétabilité locale — explication d'une décision individuelle (SHAP Waterfall) :
+
+![SHAP Waterfall](shap_waterfall.png)
+
+Interprétabilité globale — importance des features sur l'ensemble du modèle (SHAP Beeswarm) :
+
+![SHAP Beeswarm](shap_beeswarm.png)
+
 ---
 
 ## Stack
